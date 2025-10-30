@@ -47,6 +47,7 @@ import AdsMarketing from "../pages/page/AdsMarketing";
 import IncomeHistory from "../pages/page/IncomeHistory";
 import DriveOffer from "../pages/page/DriveOffer";
 import AllOrders from "../pages/Admin/AllOrder/AllOrders";
+import ManageUser from "../pages/Admin/ManegeUser/ManegeUser";
 
 
 export const router = createBrowserRouter([
@@ -321,6 +322,11 @@ export const router = createBrowserRouter([
       {
         path: "add-product-detail",
         Component: ProductDetailPage,
+      },
+ 
+      {
+        path: "manage-users",
+        Component: ManageUser,
       },
     ],
   },
