@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Header_wallet from '../Shared/Header_wallet';
+import Header_web from '../Shared/Header_web';
 
 // Main App component for adding voucher balance
 const AddBalance = () => {
@@ -27,12 +28,20 @@ const AddBalance = () => {
   };
 
   return (
-    <div className="min-h-screen lg:max-w-7xl bg-yellow-50 font-sans antialiased flex flex-col items-center">
+    <div className="min-h-screen lg:max-w-7xl mx-auto bg-yellow-50 font-sans antialiased flex flex-col items-center">
       {/* Top Header Section (Yellow Background) */}
-      <div className="w-full bg-[#ff9100]  p-4 pb-16 shadow-lg text-white">
+      <div className="w-full bg-[#ff9100] p-4 pb-16 shadow-lg text-white">
         
         {/* Header Bar */}
-        <Header_wallet></Header_wallet>
+        <div className='block lg:hidden'>
+          <Header_wallet></Header_wallet>
+           
+        </div>
+        <div className='hidden lg:block'>
+          <Header_web></Header_web>
+          <h1 className="text-white text-lg lg:text-2xl font-bold">{t("addbalance")}</h1>
+        </div>
+        
         
 
         {/* Voucher Balance Display */}

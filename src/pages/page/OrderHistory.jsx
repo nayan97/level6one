@@ -4,6 +4,9 @@ import { Link } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Copy } from "lucide-react";
 import Swal from "sweetalert2";
+import Header from "../Shared/Header";
+import Header_web from "../Shared/Header_web";
+import Link_Arrow from "../Shared/Link_Arrow";
 
 export default function OrderHistory() {
   const { t } = useTranslation();
@@ -58,20 +61,18 @@ export default function OrderHistory() {
   return (
     <div>
       {/* Header */}
-      <div className=" mb-4">
-        <div className="bg-[#ff9100] h-20">
-          <div className="flex items-center gap-4">
-            <Link
-              to={"/"}
-              className="text-white bg-[#ff9100] p-3 rounded-full shadow-sm text-xl"
-            >
-              ←
-            </Link>
-            <h1 className="text-white font-bold">{t("OrderHistory")}</h1>
+      <div className="max-w-7xl mx-auto mb-4 top-0 sticky">
+        
+        
+        <div className="w-full top-0 sticky  bg-[#ff9100] p-4 pb-4 text-white">
+          <Header_web></Header_web>
+          <div className="flex items-center h-full gap-4 text-white">
+            <Link_Arrow></Link_Arrow>
+            <h1 className="text-white text-lg lg:text-2xl font-bold">{t("OrderHistory")}</h1>
           </div>
         </div>
       </div>
-      <main className="bg-gray-100 min-h-screen rounded-t-[50px] pt-4 pb-6">
+      <main className="bg-gray-100 max-w-7xl mx-auto min-h-screen rounded-t-[50px] pt-4 pb-6">
         {/* Tabs */}
         <div className="flex gap-2 mb-4 justify-around px-4">
           {tabs.map((tab) => (
