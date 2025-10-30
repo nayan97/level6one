@@ -20,6 +20,7 @@ import balanceimg from "../../assets/balance.png"
 import withdrawlimg from "../../assets/withdraw.png"
 import orderhistoryimg from "../../assets/orderhistory.png"
 import logoutimg from "../../assets/logout.png"
+import verified_logo from "../../assets/verified.png"
 
 const Header_shop = ({ showitem }) => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -47,7 +48,7 @@ const Header_shop = ({ showitem }) => {
       try {
         const response = await axiosSecure.get("/profile");
         // assuming API returns something like: { user: {...}, image: "..." }
-        setProfile(response.data.user || response.data);
+        setProfile(response.data.data || response.data);
       } catch (err) {
         console.error("Failed to fetch profile:", err);
         setError(err);
@@ -377,9 +378,10 @@ const Header_shop = ({ showitem }) => {
                     </div>
 
                     <div>
-                      <p className="text-lg font-bold leading-none">
-                        {profile?.name}
-                      </p>
+                       <p className="text-lg p-1 flex items-center font-bold leading-none">
+                                                                    {profile?.name} 
+                                                                    {profile?.is_approved=="approved" && <img className="w-8" src={verified_logo}></img> }
+                                                </p>
                       <div className="flex items-center text-white">
                         <span>Refer Code: {referCode}</span>
                         <Copy

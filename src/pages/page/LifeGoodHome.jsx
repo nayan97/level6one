@@ -21,7 +21,7 @@ import microjobimg from "../../assets/microjob.png"
 const projects1 = [
   { name: "MobileRecharge", icon: rechargeimg, isActive: true, link: "comingsoon" },
   { name: "DriveOffer", icon: driveimg, isActive: true, link: "/driveoffer" },
-  { name: "ResellingProduct", icon: resellimg, isActive: true , link: "comingsoon"},
+  { name: "ResellingProduct", icon: resellimg, isActive: true , link: "/shop"},
   { name: "AdsViewIncome", icon: addsimg, isActive: true, link: "adsview" },
   { name: "MicroJob", icon: microjobimg, isActive: true , link: "comingsoon"},
   { name: "JobPost", icon: jobimg, isActive: true , link: "/typing-job"},
