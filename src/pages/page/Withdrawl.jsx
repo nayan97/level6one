@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import Header from '../Shared/Header';
+import Header_web from '../Shared/Header_web';
+import Link_Arrow from '../Shared/Link_Arrow';
 
 
 // Define the main App component using standard JavaScript and Hooks
@@ -32,43 +35,37 @@ const Withdrawl = () => {
   };
 
   return (
-    <div className="min-h-screen lg:max-w-7xl bg-yellow-50 font-sans antialiased flex flex-col items-center">
+    <div className="min-h-screen  lg:mx-auto lg:max-w-7xl font-sans antialiased flex flex-col items-center">
       {/* Top Header Section (Yellow Background) */}
-      <div className="w-full bg-[#ff9100] p-4 pb-16 shadow-lg text-white">
-        <div className="flex items-center space-x-4 mb-8 pt-4">
+      
+      <div className="w-full top-0 sticky  bg-[#ff9100] p-4 pb-4 text-white">
+        <Header_web></Header_web>
+        <div className='sticky bg-[#ff9100] top-0 z-10'>
+          <div className="flex  items-center space-x-4 mb-8 py-4">
           {/* Back Arrow Icon (Lucide-react equivalent SVG) */}
-          <Link to={"/"}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 cursor-pointer"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
+          <Link_Arrow></Link_Arrow>
           
-          </Link>
           
-          <h1 className="text-xl font-bold">{t("Withdrawl")}</h1>
+          <h1 className="text-white text-lg lg:text-2xl font-bold">{t("Withdrawl")}</h1>
         </div>
+
+        </div>
+        
 
         {/* Balance Display */}
         <div className="flex justify-around text-center mt-4">
           <div className="flex flex-col">
             <span className="text-lg font-semibold">{t("IncomeBalance")}</span>
-            <span className="text-3xl font-extrabold">৳ 150.44 BDT</span>
+            <span className="text-2xl font-extrabold">৳ 150.44 BDT</span>
           </div>
           <div className="flex flex-col opacity-80">
             <span className="text-lg font-semibold">{t("VoucherBalance")}</span>
-            <span className="text-3xl font-extrabold">৳ 5.27 BDT</span>
+            <span className="text-2xl font-extrabold">৳ 5.27 BDT</span>
           </div>
         </div>
-      </div>
-
-      {/* Withdrawal Form Card (White Background) */}
-      <div className="w-full max-w-lg lg:max-w-7xl -mt-10 p-6 bg-white rounded-t-3xl rounded-b-lg shadow-2xl space-y-5">
+         <div className="mt-20 w-full">
+        {/* Withdrawal Form Card (White Background) */}
+      <div className="w-full max-w-lg lg:max-w-7xl -mt-10 p-6 bg-white rounded-t-[50px] shadow-2xl">
 
         {/* Select Wallet (DaisyUI select class) */}
         <div className="form-control w-full">
@@ -146,11 +143,16 @@ const Withdrawl = () => {
       </div>
 
       {/* Warning/Instructional Text in Bengali */}
-      <div className="w-full max-w-lg p-6 text-center text-red-600 text-sm mt-4">
+      <div className="w-full bg-white max-w-lg lg:max-w-7xl p-6 text-center text-red-600 text-sm">
         <p className="leading-relaxed">
           পেমেন্ট রিকুয়েস্ট দেওয়ার ২৪ থেকে ৭২ ঘন্টার মধ্যে পেমেন্ট করা হয়। সর্বনিম্ন ২৫০ টাকা উত্তোলন দিতে পারবেন এবং উত্তোলন দেওয়ার সময় ২% চার্জ কেটে নেওয়া হবে, ধন্যবাদ।
         </p>
       </div>
+
+       </div>
+      </div>
+      
+      
     </div>
   );
 };

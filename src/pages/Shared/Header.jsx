@@ -24,6 +24,7 @@ import logoutimg from "../../assets/logout.png"
 const Header = ({ showitem }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef(null);
+  
    
 
   const { t } = useTranslation();
@@ -42,7 +43,9 @@ const Header = ({ showitem }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showNotice, setShowNotice] = useState(false);
-
+    useEffect(() => {
+  if (page === "/") setShowNotice(true);
+}, [page]);
 
 
   useEffect(() => {
@@ -335,7 +338,7 @@ const Header = ({ showitem }) => {
         {/* Logo */}
         {page=="/" && <div className="flex gap-3">
           <Link to="/">
-          <img  className="hidden lg:block w-13" src="/logo.png" alt="" />
+          <img  className="hidden lg:block w-16" src="/logo.png" alt="" />
           </Link>
           
           <Link className="ml-2 block lg:hidden text-xl text-white font-bold" to="/">
@@ -415,7 +418,7 @@ const Header = ({ showitem }) => {
         
 
         {/* Notification bell */}
-       {page!=="/wallet" && <div className="relative">
+       {page!=="/wallet" && page!=="/order-history" && page!=="/addbalance" && page!=="/withdrawl" && page!=="/transaction-history" && <div className="relative">
         
        <button
   onClick={() => setShowNotice(true)}

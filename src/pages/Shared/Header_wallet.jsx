@@ -3,6 +3,7 @@ import React from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { FaHistory } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
+import Header_web from "./Header_web";
 
 
 const Header_wallet = () => {
@@ -22,7 +23,8 @@ const Header_wallet = () => {
 
   return (
     <>
-      <div className="bg-[#ff9100] w-full max-w-7xl mx-auto h-20 flex justify-around items-center gap-4 px-4">
+      <Header_web></Header_web>
+      <div className="bg-[#ff9100] w-full max-w-7xl mx-auto h-20 flex justify-between items-center gap-4 ">
         <Link
           onClick={handleGoBack}
           className="text-white bg-[#ff9100] p-3 rounded-full shadow-sm text-xl"
@@ -30,7 +32,7 @@ const Header_wallet = () => {
           <FaArrowLeft />
 
         </Link>
-        <h1 className="text-white mr-20 lg:mr-0 font-bold capitalize">
+        <h1 className="text-white mr-40 lg:mr-0 font-bold capitalize">
           {t(lastSegment || "wallet")}
         </h1>
         {page!=="/incomehistory" && <Link to={"/incomehistory"}>
