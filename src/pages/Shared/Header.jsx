@@ -19,6 +19,7 @@ import balanceimg from "../../assets/balance.png"
 import withdrawlimg from "../../assets/withdraw.png"
 import orderhistoryimg from "../../assets/orderhistory.png"
 import logoutimg from "../../assets/logout.png"
+import verified_logo from "../../assets/verified.png"
 
 
 const Header = ({ showitem }) => {
@@ -53,7 +54,7 @@ const Header = ({ showitem }) => {
         try {
           const response = await axiosSecure.get("/profile");
           // assuming API returns something like: { user: {...}, image: "..." }
-          setProfile(response.data.user || response.data);
+          setProfile(response.data.data || response.data);
         } catch (err) {
           console.error("Failed to fetch profile:", err);
           setError(err);
@@ -136,6 +137,7 @@ const Header = ({ showitem }) => {
     });
 };
   const referCode = profile?.code;
+  console.log(referCode);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referCode);
@@ -311,7 +313,7 @@ const Header = ({ showitem }) => {
   </>
 );
   return (
-    <div className="navbar bg-[#ff9100] mx-auto max-w-7xl ">
+    <div className="navbar sticky top-0 z-10 bg-[#ff9100] mx-auto max-w-7xl ">
       {/* Navbar Start */}
       <div className="navbar-start flex items-center">
         {/* Hamburger icon for mobile */}
@@ -392,8 +394,9 @@ const Header = ({ showitem }) => {
                     </div>
 
                     <div>
-                      <p className="text-lg p-1 font-bold leading-none">
-                        {profile?.name}
+                      <p className="text-lg p-1 flex items-center font-bold leading-none">
+                        {profile?.name} 
+                        {profile?.is_approved=="approved" && <img className="w-8" src={verified_logo}></img> }
                       </p>
                       <div className="flex p-1 items-center text-white">
                         <span>Refer Code: {referCode}</span>

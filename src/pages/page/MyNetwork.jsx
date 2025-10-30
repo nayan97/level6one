@@ -16,13 +16,55 @@ import orderhistoryimg from "../../assets/orderhistory.png"
 import logoutimg from "../../assets/logout.png"
 import { IoLanguageOutline } from "react-icons/io5";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import verified_logo from "../../assets/verified.png"
 
 const MyNetwork = () => {
   const [search, setSearch] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef(null);
   const { user, logout } = useAuth();
-  
+  const [profile, setProfile] = useState(null);
+  const [networks, setNetowrks] = useState([]);
+  console.log(networks);
+  const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  console.log(profile);
+  const axiosSecure = useAxiosSecure();
+useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axiosSecure.get("/profile");
+        // assuming API returns something like: { user: {...}, image: "..." }
+        setProfile(response.data.data || response.data);
+      } catch (err) {
+        console.error("Failed to fetch profile:", err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+  // const referralCode=profile?.referred_code
+//   useEffect(() => {
+//   const fetchReferredUsers = async () => {
+//     try {
+//       const response = await axiosSecure.get(`/referred-users/${referralCode}`);
+//       setNetowrks(response.data.data || response.data);
+//     } catch (err) {
+//       console.error("Failed to fetch referred users:", err);
+//       setError(err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   if (referralCode) {
+//     fetchReferredUsers();
+//   }
+// }, [referralCode]);
 
 useEffect(() => {
   const handleClickOutside = (event) => {
@@ -55,7 +97,7 @@ useEffect(() => {
       .catch((err) => console.log(err));
   };
 
-  const referCode = "45425486";
+  const referCode = profile?.code;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referCode);
@@ -223,7 +265,7 @@ useEffect(() => {
   );
 
   return (
-    <div className="min-h-screen mx-auto lg:max-w-7xl bg-[#ff9100]">
+    <div className="min-h-screen sticky top-0 z-10 mx-auto lg:max-w-7xl bg-[#ff9100]">
       
       {/* Header */}
       <div className="navbar-start flex w-full items-center">
@@ -248,7 +290,7 @@ useEffect(() => {
           </svg>
         </button>
         {/* Logo */}
-        <div className="flex w-full justify-around">
+        <div className="flex w-full justify-between">
             <Link className="ml-2 text-xl text-white font-bold" to="/">
           {t("MyNetwork")}
         </Link>
@@ -283,10 +325,10 @@ useEffect(() => {
         <div className="flex justify-between items-center ">
           <div className="bg-[#ff9100] w-full h-full text-white p-2 flex flex-col justify-start">
             <div className="flex flex-col items-start gap-4 ">
-              <div className="avatar mr-3">
+              <div className="avatar">
                 <div className="w-10 h-10 rounded-full ring ring-white ring-offset-1 overflow-hidden">
                   <img
-                    src="https://www.svgrepo.com/show/384670/account-avatar-profile-user.svg"
+                    src={profile?.avatar_url}
                     alt="User Profile"
                     onError={(e) => {
                       e.target.onerror = null;
@@ -298,7 +340,10 @@ useEffect(() => {
               </div>
 
               <div>
-                <p className="text-lg font-bold leading-none">Md. ÃL~Ãmĩn</p>
+                <p className="text-lg p-1 flex items-center font-bold leading-none">
+                                                              {profile?.name} 
+                                                              {profile?.is_approved=="approved" && <img className="w-8" src={verified_logo}></img> }
+                                          </p>
                 <div className="flex items-center text-white">
                   <span>Refer Code: {referCode}</span>
                   <Copy

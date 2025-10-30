@@ -21,7 +21,7 @@ const ProfilePage = () => {
       try {
         const response = await axiosSecure.get("/profile");
         // assuming API returns something like: { user: {...}, image: "..." }
-        setProfile(response.data.user || response.data);
+        setProfile(response.data.data || response.data);
       } catch (err) {
         console.error("Failed to fetch profile:", err);
         setError(err);
@@ -127,7 +127,7 @@ const ProfilePage = () => {
         </div>
         <div className="rounded-t-[50px] ">
           {/* Profile Details Card */}
-          <div className="max-w-lg lg:max-w-7xl mx-auto min-h-[615px] bg-gray-100 shadow-md rounded-t-[50px] p-6 mt-6">
+          <div className="max-w-lg lg:max-w-7xl mx-auto min-h-[615px] lg:min-h-[800px] bg-gray-100 shadow-md rounded-t-[50px] p-6 mt-6">
             <div className="space-y-3 bg-white">
               <div className="flex justify-between bg-white border-b border-b-gray-200 p-6">
                 <span className="font-medium text-gray-600">{t("Email")}:</span>
