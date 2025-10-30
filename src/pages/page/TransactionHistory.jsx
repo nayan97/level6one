@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import Header_web from '../Shared/Header_web';
+import Link_Arrow from '../Shared/Link_Arrow';
 
 // Mock Transaction Data
 const mockTransactions = [
@@ -75,33 +77,23 @@ const TransactionHistory = () => {
   const [transactions, setTransactions] = useState(mockTransactions);
 
   return (
-    <div className="min-h-screen lg:max-w-7xl bg-yellow-50 font-sans antialiased flex flex-col items-center">
+    <div className="min-h-screen mx-auto lg:max-w-7xl font-sans antialiased flex flex-col items-center">
       {/* Top Header Section (Yellow Background) */}
-      <div className="w-full bg-[#ff9100] p-4 pb-4 shadow-lg text-white">
+      
+      <div className="w-full top-0 sticky  bg-[#ff9100] p-4 pb-4 text-white">
+        <Header_web></Header_web>
         <div className="flex items-center space-x-4 mb-2 pt-4">
           {/* Back Arrow Icon (Lucide-react equivalent SVG) */}
-          <Link to={"/"}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7 cursor-pointer"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
+          <Link_Arrow></Link_Arrow>
           
-          </Link>
-          
-          <h1 className="text-2xl font-bold">{t("Transactions")}</h1>
+          <h1 className="text-white text-lg lg:text-2xl font-bold">{t("Transactions")}</h1>
         </div>
       </div>
 
       {/* Transaction List Container (White Background Card) */}
-      <div className="w-full max-w-lg lg:max-w-7xl  -mt-4 p-0 bg-[#ff9100] rounded-t-3xl shadow-2xl overflow-hidden">
+      <div className="w-full max-w-lg min-h-screen lg:max-w-7xl  p-0 bg-[#ff9100] rounded-t-[50px] shadow-2xl overflow-hidden">
         {/* The transaction list */}
-        <div className="divide-y divide-gray-100">
+        <div className="divide-y min-h-screen divide-gray-100">
           {transactions.map(tx => (
             <TransactionItem key={tx.id} transaction={tx} />
           ))}
