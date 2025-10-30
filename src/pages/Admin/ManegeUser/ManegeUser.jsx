@@ -81,56 +81,115 @@ const ManageUser = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Manage Users</h2>
+        <div className="min-h-screen bg-gray-50">
+        <div className="p-4">
+            <h2 className="text-2xl font-bold mb-4 text-gray-800">Manage Users</h2>
 
-        {users.length === 0 ? (
-          <p className="text-center text-gray-600 mt-10">No users found.</p>
-        ) : (
-          <div className="overflow-x-auto bg-white rounded-xl shadow">
-            <table className="min-w-full">
-              <thead className="bg-gray-200 text-gray-700">
-                <tr>
-                  <th className="py-3 px-4 text-left">#</th>
-                  <th className="py-3 px-4 text-left">Name</th>
-                  <th className="py-3 px-4 text-left">Email</th>
-                  <th className="py-3 px-4 text-left">Role</th>
-                  <th className="py-3 px-4 text-left">Verify</th>
-                  <th className="py-3 px-4 text-left">Referred Code</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user, index) => (
-                  <tr
-                    key={user.id}
-                    className="border-b hover:bg-gray-50 transition"
-                  >
-                    <td className="py-3 px-4">{index + 1}</td>
-                    <td className="py-3 px-4">{user.name}</td>
-                    <td className="py-3 px-4">{user.email}</td>
+            {users.length === 0 ? (
+            <p className="text-center text-gray-600 mt-10">No users found.</p>
+            ) : (
+            <>
+                {/* 💻 Desktop Table View */}
+                <div className="hidden md:block overflow-x-auto bg-white rounded-xl shadow">
+                <table className="min-w-full">
+                    <thead className="bg-gray-200 text-gray-700">
+                    <tr>
+                        <th className="py-3 px-4 text-left">#</th>
+                        <th className="py-3 px-4 text-left">Name</th>
+                        <th className="py-3 px-4 text-left">Email</th>
+                        <th className="py-3 px-4 text-left">Role</th>
+                        <th className="py-3 px-4 text-left">Verify</th>
+                        <th className="py-3 px-4 text-left">Referred Code</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {users.map((user, index) => (
+                        <tr
+                        key={user.id}
+                        className="border-b hover:bg-gray-50 transition"
+                        >
+                        <td className="py-3 px-4">{index + 1}</td>
+                        <td className="py-3 px-4">{user.name}</td>
+                        <td className="py-3 px-4">{user.email}</td>
 
-                    {/* Role */}
-                    <td className="py-3 px-4">
-                      <select
-                        value={user.role}
-                        onChange={(e) =>
-                          handleRoleChange(user.id, e.target.value)
-                        }
-                        className="border border-gray-300 rounded-lg px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
-                      >
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                      </select>
-                    </td>
-
-                    {/* Approval */}
+                        {/* Role */}
                         <td className="py-3 px-4">
+                            <select
+                            value={user.role}
+                            onChange={(e) =>
+                                handleRoleChange(user.id, e.target.value)
+                            }
+                            className="border border-gray-300 rounded-lg px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
+                            >
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                            </select>
+                        </td>
+
+                        {/* Approval */}
+                        <td className="py-3 px-4">
+                            <select
+                            value={user.is_approved || "pending"}
+                            onChange={(e) =>
+                                handleApprovalChange(user.id, e.target.value)
+                            }
+                            disabled={user.is_approved === "approved"}
+                            className={`border rounded-lg px-2 py-1 text-sm focus:outline-none focus:ring-1 ${
+                                user.is_approved === "approved"
+                                ? "bg-green-100 text-green-700 border-green-300 cursor-not-allowed opacity-70"
+                                : "bg-yellow-100 text-yellow-700 border-yellow-300"
+                            }`}
+                            >
+                            <option value="approved">Approved</option>
+                            <option value="pending">Pending</option>
+                            </select>
+                        </td>
+
+                        <td className="py-3 px-4 text-sm text-gray-600">
+                            {user.referred_code}
+                        </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+                </div>
+
+                {/* 📱 Mobile Card View */}
+                <div className="md:hidden space-y-4">
+                {users.map((user, index) => (
+                    <div
+                    key={user.id}
+                    className="card bg-white shadow-md rounded-xl border border-gray-100"
+                    >
+                    <div className="card-body p-4">
+                        <h3 className="card-title text-lg font-semibold text-gray-800">
+                        {index + 1}. {user.name}
+                        </h3>
+                        <p className="text-sm text-gray-600">{user.email}</p>
+
+                        <div className="mt-3">
+                        <p className="text-xs text-gray-500 font-semibold">Role</p>
+                        <select
+                            value={user.role}
+                            onChange={(e) =>
+                            handleRoleChange(user.id, e.target.value)
+                            }
+                            className="select select-bordered select-sm w-full mt-1"
+                        >
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                        </div>
+
+                        <div className="mt-3">
+                        <p className="text-xs text-gray-500 font-semibold">Verify</p>
                         <select
                             value={user.is_approved || "pending"}
-                            onChange={(e) => handleApprovalChange(user.id, e.target.value)}
-                            disabled={user.is_approved === "approved"} // ✅ Disable when already approved
-                            className={`border rounded-lg px-2 py-1 text-sm focus:outline-none focus:ring-1 ${
+                            onChange={(e) =>
+                            handleApprovalChange(user.id, e.target.value)
+                            }
+                            disabled={user.is_approved === "approved"}
+                            className={`select select-sm w-full mt-1 ${
                             user.is_approved === "approved"
                                 ? "bg-green-100 text-green-700 border-green-300 cursor-not-allowed opacity-70"
                                 : "bg-yellow-100 text-yellow-700 border-yellow-300"
@@ -139,20 +198,21 @@ const ManageUser = () => {
                             <option value="approved">Approved</option>
                             <option value="pending">Pending</option>
                         </select>
-                        </td>
+                        </div>
 
-
-                    <td className="py-3 px-4 text-sm text-gray-600">
-                      {user.referred_code}
-                    </td>
-                  </tr>
+                        <div className="mt-3 text-sm text-gray-600">
+                        <p className="font-semibold">Referred Code:</p>
+                        <p>{user.referred_code || "N/A"}</p>
+                        </div>
+                    </div>
+                    </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-    </div>
+                </div>
+            </>
+            )}
+        </div>
+        </div>
+
   );
 };
 
