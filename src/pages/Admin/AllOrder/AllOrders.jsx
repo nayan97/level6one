@@ -76,12 +76,13 @@ const AllOrders = () => {
                   <tr>
                     <th className="py-3 px-4 text-left">#</th>
                     <th className="py-3 px-4 text-left">Name</th>
-                    <th className="py-3 px-4 text-left">Address</th>
+                    
                     <th className="py-3 px-4 text-left">Admin Price</th>
-                    <th className="py-3 px-4 text-left">Delivery Charge</th>
+                    <th className="py-3 px-4 text-left">Reseller sell Price</th>
+                    
                     <th className="py-3 px-4 text-left">Delivery Status</th>
                     <th className="py-3 px-4 text-left">Profit</th>
-                    <th className="py-3 px-4 text-left">Product ID</th>
+                   
                     <th className="py-3 px-4 text-left">Total</th>
                   </tr>
                 </thead>
@@ -92,10 +93,11 @@ const AllOrders = () => {
                       className="border-b hover:bg-gray-50 transition"
                     >
                       <td className="py-3 px-4">{index + 1}</td>
-                      <td className="py-3 px-4">{order?.name}</td>
-                      <td className="py-3 px-4">{order?.address}</td>
+                      <td className="py-3 px-4">{order?.customer_name}</td>
+                      
                       <td className="py-3 px-4">{order?.admin_price}</td>
-                      <td className="py-3 px-4">{order?.delivery_charge}</td>
+                      <td className="py-3 px-4">{order?.reseller_sell_price}</td>
+                      
 
                       {/* Editable Dropdown */}
                       <td className="py-3 px-4">
@@ -122,7 +124,7 @@ const AllOrders = () => {
                       </td>
 
                       <td className="py-3 px-4">{order?.reseller_profit}</td>
-                      <td className="py-3 px-4">{order?.product_id}</td>
+                     
                       <td className="py-3 px-4 font-bold text-gray-800">
                         ৳{order?.total}
                       </td>

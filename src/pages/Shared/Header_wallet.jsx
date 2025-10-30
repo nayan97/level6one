@@ -24,7 +24,7 @@ const Header_wallet = () => {
   return (
     <>
       <Header_web></Header_web>
-      <div className="bg-[#ff9100] w-full max-w-7xl mx-auto h-20 flex justify-between items-center gap-4 ">
+      <div className="bg-[#ff9100] sticky top-0  w-full max-w-7xl mx-auto h-20 flex justify-between items-center gap-4 ">
         <Link
           onClick={handleGoBack}
           className="text-white bg-[#ff9100] p-3 rounded-full shadow-sm text-xl"
