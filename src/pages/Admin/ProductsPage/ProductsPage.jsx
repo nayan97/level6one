@@ -10,6 +10,7 @@ const ProductsPage = () => {
   const { t, i18n } = useTranslation();
   const axiosSecure = useAxiosSecure();
   const [products, setProducts] = useState([]);
+  console.log(products);
   const [categories, setCategories] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [sizes, setSizes] = useState([]);
@@ -119,6 +120,8 @@ const ProductsPage = () => {
                       <th className="p-3 border">{t("Image")}</th>
                       <th className="p-3 border">{t("Title")}</th>
                       <th className="p-3 border">{t("Price")}</th>
+                      <th className="p-3 border">{t("Max_price")}</th>
+                      <th className="p-3 border">{t("Profit")}</th>
                       <th className="p-3 border">{t("Featured")}</th>
                       <th className="p-3 border text-center">{t("Actions")}</th>
                     </tr>
@@ -186,6 +189,8 @@ const ProductsPage = () => {
                     <th className="p-3 border">{t("Image")}</th>
                     <th className="p-3 border">{t("Title")}</th>
                     <th className="p-3 border">{t("Price")}</th>
+                    <th className="p-3 border">{t("Max_price")}</th>
+                    <th className="p-3 border">{t("Profit")}</th>
                     <th className="p-3 border">{t("Featured")}</th>
                     <th className="p-3 border text-center">{t("Actions")}</th>
                   </tr>
@@ -212,6 +217,12 @@ const ProductsPage = () => {
                       </td>
                       <td className="p-3 border whitespace-nowrap">
                         {p.price}
+                      </td>
+                      <td className="p-3 border whitespace-nowrap">
+                        {p.max_price}
+                      </td>
+                      <td className="p-3 border whitespace-nowrap">
+                        {p.profit}
                       </td>
                       <td className="p-3 border text-center">
                         {p.is_featured == "yes"? (
@@ -272,7 +283,9 @@ const ProductsPage = () => {
                           )}
                         </h2>
 
-                        <p className="text-gray-600">💰 {p.price}</p>
+                        <p className="text-gray-600">Price: <span className="font-bold"> {p.price}</span> </p>
+                        <p className="text-gray-600">Maxprice:<span className="font-bold"> {p.max_price}</span> </p>
+                        <p className="text-gray-600">Profit:<span className="font-bold"> {p.profit}</span> </p>
 
                         <div className="card-actions justify-between items-center mt-3">
                           <div className="space-x-2">

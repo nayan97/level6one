@@ -18,7 +18,7 @@ const Navbar = ({ toggleSidebar }) => {
     const fetchProfile = async () => {
       try {
         const response = await axiosSecure.get("/profile");
-        setProfile(response.data.user || response.data);
+        setProfile(response.data.data || response.data);
       } catch (err) {
         console.error("Failed to fetch profile:", err);
         setError(err);
