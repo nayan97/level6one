@@ -137,6 +137,14 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               <UserCog className="w-5 h-5" />
               <span>{t("ManageUsers")}</span>
             </NavLink>
+            <NavLink
+              to="/dashboard/manage-withdraws"
+              onClick={handleLinkClick}
+              className={linkClasses}
+            >
+              <UserCog className="w-5 h-5" />
+              <span>{t("AllWithdraws")}</span>
+            </NavLink>
           </>
         </div>
       </aside>

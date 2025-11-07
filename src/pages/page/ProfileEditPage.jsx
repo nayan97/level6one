@@ -30,7 +30,11 @@ const ProfileEditPage = () => {
     const fetchProfile = async () => {
       try {
         const res = await axiosSecure.get("/profile");
-        const user = res.data?.user || res.data;
+        // console.log(res.data);
+        
+        const user = res.data?.data || res.data;
+        console.log(user);
+        
         setProfile(user);
 
         // Populate form fields safely

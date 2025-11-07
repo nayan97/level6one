@@ -1,0 +1,134 @@
+import React from "react";
+import nagad from "../../assets/nagod.png";
+import Swal from "sweetalert2";
+import { Copy } from "lucide-react";
+import { NavLink } from "react-router";
+
+export default function NagadPayment() {
+  const handleWhatsAppClick = (number) => {
+    const formatted = `880${number.slice(1)}`;
+    const url = `https://wa.me/${formatted}`;
+    window.open(url, "_blank");
+  };
+
+  const Code = "01968340274";
+  const handleCopy = () => {
+    navigator.clipboard
+      .writeText(Code)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Copied!",
+          text: "This number copied to clipboard",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to copy the Number",
+        });
+      });
+  };
+
+  return (
+    <div className="min-h-screen bg-[#ff9100] flex flex-col items-center pt-4">
+      {/* Header */}
+      <div className="w-full max-w-md">
+        <div className="flex items-center space-x-2 mb-4 px-4">
+          <NavLink to="/" className="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 text-white"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
+          </NavLink>
+          <h2 className="text-xl font-semibold text-white">
+            Account Verification
+          </h2>
+        </div>
+
+        {/* Main Card */}
+        <div className="bg-white shadow-xl rounded-t-[50px] pt-6 pb-10 px-8 text-center">
+          {/* Logo */}
+          <img src={nagad} alt="Nagad" className="h-16 mx-auto mb-3" />
+
+          {/* Amount */}
+          <div className="bg-white w-full text-[#d32f2f] text-2xl font-bold inline-block px-6 py-1 rounded-xl shadow-md mb-4 text-start">
+            <span className="font-extrabold">৳</span> 150
+          </div>
+
+          {/* Form Section */}
+          <div className="bg-[#d32f2f] rounded-xl text-white py-6 px-6 text-left shadow-md">
+            <ul className="list-disc list-outside pl-5 space-y-3 text-sm leading-relaxed">
+              <li className="shadow-md py-1">
+                *167# ডায়াল করে আপনার NAGAD মোবাইল মেনুতে যান অথবা NAGAD অ্যাপে
+                যান।
+              </li>
+
+              <li className="shadow-md py-1">
+                <span className="font-semibold text-yellow-300">
+                  "Send Money"
+                </span>
+                -এ ক্লিক করুন।
+              </li>
+
+              <li className="shadow-md py-1">
+                প্রাপক নম্বর হিসেবে এই নম্বরটি লিখুনঃ <br />
+                <span className="font-semibold text-yellow-300 flex items-center gap-2">
+                  01968340274
+                  <button
+                    onClick={handleCopy}
+                    className="bg-gray-800 text-[#d32f2f] text-xs font-semibold px-2 py-1 rounded shadow flex items-center gap-1"
+                  >
+                    <Copy className="size-4" /> Copy
+                  </button>
+                </span>
+              </li>
+
+              <li className="shadow-md py-1">
+                টাকার পরিমাণঃ{" "}
+                <span className="font-semibold text-yellow-300">150</span>
+              </li>
+
+              <li className="shadow-md py-1">
+                নিশ্চিত করতে এখন আপনার NAGAD মোবাইল মেনু পিন লিখুন।
+              </li>
+
+              <li className="shadow-md py-1">
+                সবকিছু ঠিক থাকলে, আপনি NAGAD থেকে একটি নিশ্চিতকরণ বার্তা পাবেন।
+              </li>
+
+              <li className="shadow-md py-1">
+                নিচের VERIFY বাটনে ক্লিক করুন। ভেরিফাই বাটনে ক্লিক করার পর
+                আপনাকে হোয়াটসঅ্যাপে নিয়ে যাবে! আপনি যে পেমেন্ট করছেন তার একটা
+                স্ক্রিনশট দিবেন, ট্রানজেকশন আইডি দিবেন এবং আপনার একাউন্ট রেফার
+                কোড দিয়ে মেসেজ করবেন। এডমিন চেক করে 15/30 মিনিটের মধ্যে আপনার
+                একাউন্ট ভেরিফাই করে দেওয়া হবেই ইনশাআল্লাহ।
+              </li>
+            </ul>
+          </div>
+
+          {/* Verify Button */}
+          <button
+            onClick={() => handleWhatsAppClick("01968340274")}
+            className="mt-6 bg-[#d32f2f] text-white font-semibold w-full py-3 rounded-full text-lg shadow-md hover:bg-[#e6005a] transition"
+          >
+            VERIFY
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

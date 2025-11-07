@@ -44,9 +44,9 @@ const Header = ({ showitem }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showNotice, setShowNotice] = useState(false);
-    useEffect(() => {
-  if (page === "/") setShowNotice(true);
-}, [page]);
+//     useEffect(() => {
+//   if (page === "/") setShowNotice(true);
+// }, [page]);
 
 
   useEffect(() => {

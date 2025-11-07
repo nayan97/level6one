@@ -2,18 +2,20 @@ import { useEffect, useState, useCallback } from "react";
 import { AuthContext } from "./AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
+
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
+  // const navigate = useNavigate();
 
   const fetchUser = useCallback(async () => {
     const token = localStorage.getItem("auth_token");
-    if (!token) {
-      setLoading(false);
-      setUser(null);
-      return;
-    }
+    // if (!token) {
+    //   setLoading(false);
+    //   setUser(null);
+    //   return;
+    // }
 
     try {
       const { data } = await axiosSecure.get("/user");
@@ -30,14 +32,26 @@ export default function AuthProvider({ children }) {
   }, [fetchUser]);
 
   const login = async (email, password) => {
-    setLoading(true);
+    // setLoading(true);
     try {
       const { data } = await axiosSecure.post("/login", { email, password });
       localStorage.setItem("auth_token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      // ✅ Immediately update the context with backend data
-      await fetchUser();
+      setUser(data.user);
+
+      // ✅ Redirect based on role
+      if (data.user.role === "admin") {
+        window.location.href = "/dashboard";
+      } else {
+        window.location.href = "/";
+      }
+
+      // if (data.user.role === "admin") {
+      //   navigate("/dashboard");
+      // } else {
+      //   navigate("/");
+      // }
 
       return data.user;
     } finally {

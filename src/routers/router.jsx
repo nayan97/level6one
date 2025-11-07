@@ -48,6 +48,11 @@ import IncomeHistory from "../pages/page/IncomeHistory";
 import DriveOffer from "../pages/page/DriveOffer";
 import AllOrders from "../pages/Admin/AllOrder/AllOrders";
 import ManageUser from "../pages/Admin/ManegeUser/ManegeUser";
+import AllWithdraws from "../pages/Admin/AllWithdraws/AllWithdraws";
+import AccountVerification from "../pages/page/AccountVerification";
+import BkashPayment from "../pages/page/BkashPayment";
+import NagadPayment from "../pages/page/NagodPayment";
+import MyUsers from "../pages/page/MyUsers";
 
 
 export const router = createBrowserRouter([
@@ -113,6 +118,38 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ShoppingCart />
+          </PrivateRoute>
+        ),
+      },
+                  {
+        path: "my-users",
+        element: (
+          <PrivateRoute>
+            <MyUsers />
+          </PrivateRoute>
+        ),
+      },
+            {
+        path: "ac_verify",
+        element: (
+          <PrivateRoute>
+            <AccountVerification />
+          </PrivateRoute>
+        ),
+      },
+                  {
+        path: "bkash_payment",
+        element: (
+          <PrivateRoute>
+            <BkashPayment />
+          </PrivateRoute>
+        ),
+      },
+                        {
+        path: "nagod_payment",
+        element: (
+          <PrivateRoute>
+            <NagadPayment />
           </PrivateRoute>
         ),
       },
@@ -328,6 +365,11 @@ export const router = createBrowserRouter([
         path: "manage-users",
         Component: ManageUser,
       },
+       {
+        path: "manage-withdraws",
+        Component: AllWithdraws,
+      },
+      
     ],
   },
 ]);

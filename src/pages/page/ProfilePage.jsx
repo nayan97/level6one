@@ -20,6 +20,7 @@ const ProfilePage = () => {
     const fetchProfile = async () => {
       try {
         const response = await axiosSecure.get("/profile");
+        console.log(response.data);
         // assuming API returns something like: { user: {...}, image: "..." }
         setProfile(response.data.data || response.data);
       } catch (err) {
